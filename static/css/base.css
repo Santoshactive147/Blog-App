@@ -1,0 +1,37 @@
+/* Set a background color for the header */
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Space between h1 and nav */
+    align-items: center; /* Center items vertically */
+    width: 100%;
+    background-color: #333; /* Change header background color */
+    color: white; /* Make text white to contrast with the dark background */
+    padding: 15px 30px; /* Add padding for spacing */
+}
+
+/* Style the anchor link to look like a button */
+.add-blog-button {
+    text-decoration: none; /* Remove underline */
+    color: white; /* Make the text white */
+    background-color: #007bff; /* Blue background */
+    padding: 10px 20px; /* Add padding around the text */
+    margin-left: 10px;
+    border-radius: 20px; /* Round the corners */
+    font-size: 16px; /* Font size for the link */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+   
+   
+}
+
+/* Add a hover effect for the "Add Blog" button */
+.add-blog-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Styling for nav */
+nav {
+    display: flex; /* Align items horizontally in the nav */
+    justify-content: flex-end; /* Align the 'Add Blog' link to the right */
+}
+
+
