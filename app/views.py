@@ -12,7 +12,8 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def home(request):
     if request.user.is_authenticated:
-        posts = Post.objects.all()
+
+        posts = Post.objects.filter(author__user=request.user)
         return render(request, "base.html", {"posts": posts})
     else:
         # If not authenticated, you can redirect to the login page or any other page
