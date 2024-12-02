@@ -1,10 +1,68 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Edit Blog Post">
+    <title>Edit Blog Post</title>
 
-{% block content %}
-    <h2>Edit Post</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save Changes</button>
-    </form>
-{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/add_post.css' %}">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Edit Blog Post</h2>
+
+        <!-- Display form errors (if any) -->
+        <div class="alert" style="display: none;" id="error-message">
+            <p>There was an error with your form submission. Please try again.</p>
+        </div>
+
+        <form action="{% url 'edit-post' post.id %}" method="POST" id="blog-form">
+            {% csrf_token %}
+            
+            <!-- Title -->
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" value="{{ post.title }}" placeholder="Enter the title of the blog post" required>
+            </div>
+
+            <!-- Content -->
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea id="content" name="content" placeholder="Enter the content of your blog post" required>{{ post.content }}</textarea>
+            </div>
+
+            <!-- Author -->
+            <div class="form-group">
+                <label for="author">Author</label>
+                <input type="text" id="author" name="author" value="{{ post.author.user.username }}" placeholder="Enter the author's name" required>
+            </div>
+
+            <!-- Categories (as a multi-select dropdown) -->
+            <div class="form-group">
+                <label for="categories">Categories</label>
+                <select id="categories" name="categories" multiple required>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}"
+                            {% if category in post.categories.all %}selected{% endif %}>
+                            {{ category.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Published -->
+            <div class="form-group">
+                <label for="is_published">Published</label>
+                <input type="checkbox" id="is_published" name="is_published" {% if post.is_published %}checked{% endif %}>
+            </div>
+
+            <button type="submit">Update Post</button>
+        </form>
+    </div>
+
+    <script src="{% static 'js/add_post.js' %}"></script>
+</body>
+</html>

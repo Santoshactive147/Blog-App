@@ -6,7 +6,8 @@
         <p>{{ post.content }}</p>
         <p><strong>Author:</strong> {{ post.author.user.username }}</p>
         <p><strong>Published:</strong> {{ post.is_published|yesno:"Yes,No" }}</p>
-        <a href="#" class="edit-btn">Edit</a>
-        <a href="#" class="delete-btn">Delete</a>
+        <a href="{% url 'edit-post' post.id %}" class="edit-btn">Edit</a>
+        <a href="{% url 'delete-post' post.id %}" class="delete-btn">Delete</a>
+
     </div>
 {% endblock %}
